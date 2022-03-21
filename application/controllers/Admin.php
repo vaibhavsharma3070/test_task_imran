@@ -21,7 +21,7 @@ class Admin extends CI_Controller {
 	/* Display login page */
 	public function index()
 	{
-		$users = $this->db->where('role', 2)->get("users")->result();
+		$users = $this->db->where('role',2)->get("users")->result();
 		$this->load->view('admindashboard', ['users' => $users]);
 	}
 	
