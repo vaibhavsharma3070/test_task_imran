@@ -22,6 +22,13 @@
         <div class="col-lg-3 m-0">
             <h1 class="display-4">Product List</h1>
         </div>
+        <div class="col-lg-9 pull-right">
+            <p>
+                <a href="<?php echo base_url('/logout'); ?>" class="btn btn-info btn-sm pt-2">
+                  <span class="glyphicon glyphicon-log-out"></span> Log out
+                </a>
+            </p> 
+        </div>
     </div>
     <div class="row">
         <div class="col-lg-8 mx-auto">

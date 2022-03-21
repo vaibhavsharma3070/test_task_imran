@@ -53,7 +53,10 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['admin'] = 'auth/index';
+$route['admin'] = 'auth/adminlogin';
 $route['register'] = 'auth/register';
 $route['login'] = 'auth/login';
 $route['products'] = 'product/index';
+$route['logout'] = 'auth/logout';
+$route['admindashboard'] = 'admin/index';
+
