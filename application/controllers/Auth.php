@@ -24,6 +24,10 @@ class Auth extends CI_Controller {
 		$this->load->view('login');
 	}
 
+	public function adminlogin(){
+		$this->load->view('adminlogin');
+	}
+
 	/* Display register page */
 	public function register(){
 		$this->load->view('register');
@@ -76,16 +80,33 @@ class Auth extends CI_Controller {
 			if(count($data) == 1){
 				$verifyPasssword = password_verify($password, $data[0]->password); 	
 				if($verifyPasssword == 1){
-					 $data = ['email' => $data[0]->email, 'id' => $data[0]->id, 'name' => $data[0]->name, 'is_logged_in'=> '1'];
-					 $this->session->set_userdata($data);
-					 redirect('/products');	 
+					 $loggedinData = ['email' => $data[0]->email, 'id' => $data[0]->id, 'name' => $data[0]->name, 'is_logged_in'=> '1'];
+					 $this->session->set_userdata($loggedinData);
+					 
+					 if($data[0]->role == 1){
+					   redirect('/admindashboard');
+					 } else{
+					   redirect('/products');
+					 }
+
+				} else{
+					$this->session->set_flashdata('error', 'Credenatials not found in system...');
+					redirect('/');
 				}
 			
 			} else{
 				$this->session->set_flashdata('error', 'Credenatials not found in system...');
 				redirect('/');
-			}
+			}	
+	}
 
-			
+	public function logout(){
+		$this->session->unset_userdata('email');
+		$this->session->unset_userdata('id');
+		$this->session->unset_userdata('name');
+		$this->session->unset_userdata('is_logged_in');
+
+		$this->session->set_flashdata('success', 'You have successfully logged out.');
+		redirect('/');
 	}
 }
