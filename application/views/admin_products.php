@@ -22,7 +22,7 @@
       <a class="nav-link" href="<?php echo base_url('/admindashboard') ?>">Users</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="<?php echo base_url('/admin/products') ?>">Products</a>
+      <a class="nav-link" href="<?php echo base_url('/admindashboard') ?>">Products</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="<?php echo base_url('auth/logout') ?>">Log Out</a>
@@ -35,25 +35,28 @@
     <table id="users" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Email</th>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Description</th>
                 <th>Status</th>
             </tr>
         </thead>
         <tbody>
-          <?php if(count($users) > 0){
-                  foreach($users as $user) {
+          <?php if(count($products) > 0){
+                  foreach($products as $product) {
           ?>
             <tr>
-                <td><?php echo $user->name; ?></td>
-                <td><?php echo $user->email; ?></td>
+                <td><img src="<?php echo $product['image']; ?>" alt="<?php echo $product['title']; ?>" width="100" height="100"></td>
+                <td><?php echo $product['title']; ?></td>
+                <td><?php echo $product['description']; ?></td>
                 <td>
-                  <?php if($user->status == 0){?> <a href="javascript:void(0)" class="btn btn-danger btn-sm pt-2 btn-status" data-toggle="modal" data-target="#changestatus" data-id="<?php echo $user->id; ?>">
-                  <span class="glyphicon glyphicon-log-out"></span> Deactive
-                </a> <?php } else { ?> <a href="<?php echo base_url('/'); ?>" class="btn btn-success btn-sm pt-2 btn-status" data-toggle="modal" data-target="#changestatus" data-id="<?php echo $user->id; ?>">
-                  <span class="glyphicon glyphicon-log-out"></span> Active
-                </a>  <?php  } ?>  
+                  <?php if($product['status'] == 0){?> 
+                    <span class="btn btn-danger">Deactive</span> 
+                  <?php } else { ?> 
+                    <span class="btn btn-success">Active</span> 
+                  <?php  } ?>  
                 </td>
+                
             </tr>
          <?php } } else { ?> <tr><td colspan="6" align="center">No records found!!</td></tr>  <?php  } ?>   
         </tbody>
@@ -61,35 +64,5 @@
     </table>    
   </div>
 </div>
-
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('#users').DataTable();
-
-    $('body').on('click','.btn-status',function(){
-      if(confirm("Are you sure you want to do this?")){
-          $.ajax({
-            url: '<?php echo site_url('admin/updateStatus'); ?>',
-            type: 'POST',
-            data: {
-                id: $(this).attr('data-id'),
-            },
-            dataType: 'json',
-            success: function(data) {
-                location.reload();
-            }
-        });
-          return true;
-      } else{
-          return false;
-      }
-    });
-
-    $('body').on('click','#btnsubmit',function(){
-      
-    });
-  });
-</script>
-
 </body>
 </html>

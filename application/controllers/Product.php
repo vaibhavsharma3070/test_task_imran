@@ -18,10 +18,28 @@ class Product extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/userguide3/general/urls.html
 	 */
-	/* Display login page */
+
+	public function __construct() {
+		
+		parent::__construct();  
+
+		$this->load->helper('url');
+	    $this->load->library('session');
+	    $this->load->model('Product_model');
+
+	    if( !$this->session->userdata('is_logged_in') == 1 ){
+	    	redirect('/');
+	    }
+	    if( $this->session->userdata('role') == 1){
+    		redirect('admindashboard');
+    	}
+		
+	}
+
 	public function index()
 	{
-		$this->load->view('products');
+		$data['products'] = $this->Product_model->getAllProducts();
+		$this->load->view('products', $data);
 	}
 	
 }

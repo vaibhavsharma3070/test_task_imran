@@ -41,6 +41,7 @@
     </div>
    
     <input type="submit" class="btn btn-primary" value="Login">
+    <a  class="btn btn-success" href="<?php echo base_url('/register') ?>">SignUp Here</a>
   </form>
 </div>
 
