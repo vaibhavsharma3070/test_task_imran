@@ -50,6 +50,7 @@
     </div>
    
     <input type="submit" class="btn btn-primary" value="Regsiter">
+    <a  class="btn btn-success" href="<?php echo base_url('/') ?>">Login Here</a>
   </form>
 </div>
   <script type="text/javascript">
