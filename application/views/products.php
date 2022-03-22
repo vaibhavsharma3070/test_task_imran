@@ -160,12 +160,13 @@
             success: function(data) {
               if(data.status == false){
                 alert(data.message)
+                $('#exampleModal').modal('hide');
               }else{
                 window.location.href = 'myProducts';
               }
               
             }
-        }); //$('#exampleModal').modal('hide');
+        });
       }
     });
     $('#exampleModal').on('hidden.bs.modal', function () {
