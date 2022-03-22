@@ -149,7 +149,7 @@
       }
       if(flag == 1){
          $.ajax({
-            url: '<?php echo site_url('product/addProducts'); ?>',
+            url: '<?php echo base_url('product/addProducts'); ?>',
             type: 'POST',
             data: {
                 id: $('#pid').val(),
@@ -158,7 +158,12 @@
             },
             dataType: 'json',
             success: function(data) {
-              window.location.href = 'myProducts';
+              if(data.status == false){
+                alert(data.message)
+              }else{
+                window.location.href = 'myProducts';
+              }
+              
             }
         }); //$('#exampleModal').modal('hide');
       }

@@ -21,6 +21,7 @@ class Product_model extends CI_Model {
  
     // Select record
     $this->db->select('*');
+    $this->db->where('status',1);
     $q = $this->db->get('products
     	');
     $response = $q->result_array();

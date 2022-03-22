@@ -43,7 +43,7 @@ class Product extends CI_Controller {
 	}
 	public function allProducts()
 	{
-		$data['products'] = $this->Product_model->getAllProducts();
+		$data['products'] = $this->Product_model->getActiveProducts();
 		$this->load->view('products', $data);
 	}
 	public function myProducts()
@@ -60,7 +60,6 @@ class Product extends CI_Controller {
 		$price = $this->input->post('price');
 
 		$data = $this->User_Product_model->verifyProducts($uid,$id);
-		
 		if($data){
 			$arr = ['status' => false,"message" => "Already Added!"];
 			echo json_encode($arr);
@@ -79,5 +78,4 @@ class Product extends CI_Controller {
 
 		echo json_encode($arr);
 	}
-	
 }

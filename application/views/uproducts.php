@@ -13,6 +13,7 @@
       background: #eee;
     }
   </style>
+  
 </head>
 <body>
 
@@ -23,12 +24,13 @@
       <a class="nav-link" href="<?php echo base_url('/admindashboard') ?>">Users</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" href="<?php echo base_url('/admin/products') ?>">Products</a>
+      <a class="nav-link" href="<?php echo base_url('/admin/products') ?>">Products</a>
+    </li>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="<?php echo base_url('/admin/userProducts') ?>">User Products</a>
-    </li>
-     <li class="nav-item">
+      <a class="nav-link active" href="<?php echo base_url('/admin/userProducts') ?>">User Products</a>
+    </li> 
+    <li class="nav-item">
       <a class="nav-link" href="<?php echo base_url('/admin/reports') ?>">Reports</a>
     </li>
     <li class="nav-item">
@@ -42,10 +44,13 @@
     <table id="users" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
+                <th>User</th>
+                <th>User Status</th>
                 <th>Image</th>
                 <th>Title</th>
-                <th>Description</th>
-                <th>Status</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Product Status</th>
             </tr>
         </thead>
         <tbody>
@@ -53,15 +58,24 @@
                   foreach($products as $product) {
           ?>
             <tr>
+              <td><?php echo $product['name']; ?><br/><?php echo $product['email']; ?></td>
+              <td>
+                  <?php if($product['status'] == 0){?> 
+                    <span class="btn btn-danger">In-Active</span> 
+                  <?php } else { ?> 
+                    <span class="btn btn-success">Active</span> 
+                  <?php  } ?>  
+                </td>
                 <td><img src="<?php echo $product['image']; ?>" alt="<?php echo $product['title']; ?>" width="100" height="100"></td>
                 <td><?php echo $product['title']; ?></td>
-                <td><?php echo $product['description']; ?></td>
+                <td><?php echo $product['quantity']; ?></td>
+                <td><?php echo $product['price']; ?></td>
                 <td>
-                  <?php if($product['status'] == 0){?> <a href="javascript:void(0)" class="btn btn-danger btn-sm pt-2 btn-status" data-id="<?php echo $product['id']; ?>">
-                 Deactive
-                </a> <?php } else { ?> <a href="javascript:void(0)" class="btn btn-success btn-sm pt-2 btn-status" data-id="<?php echo $product['id']; ?>">
-                 Active
-                </a>  <?php  } ?>  
+                  <?php if($product['pstatus'] == 0){?> 
+                    <span class="btn btn-danger">In-Active</span> 
+                  <?php } else { ?> 
+                    <span class="btn btn-success">Active</span> 
+                  <?php  } ?>  
                 </td>
                 
             </tr>
@@ -71,31 +85,5 @@
     </table>    
   </div>
 </div>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('#users').DataTable();
-
-    $('body').on('click','.btn-status',function(){
-      if(confirm("Are you sure you want to do this?")){
-          $.ajax({
-            url: '<?php echo base_url('admin/productUpdate'); ?>',
-            type: 'POST',
-            cache:false,
-            data: {
-                id: $(this).attr('data-id'),
-            },
-            dataType: 'json',
-            success: function(data) {
-                location.reload();
-            }
-        });
-          return true;
-      } else{
-          return false;
-      }
-    });
-
-  });
-</script>
 </body>
 </html>
