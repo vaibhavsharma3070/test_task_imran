@@ -6,12 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script> -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script> -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
   <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-  
+  <style type="text/css">
+    .nav-item .active{
+      background: #eee;
+    }
+  </style>
 </head>
 <body>
 
@@ -19,10 +20,16 @@
     <nav class="navbar navbar-expand-sm bg-light">
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="<?php echo base_url('/admindashboard') ?>">Users</a>
+      <a class="nav-link active" href="<?php echo base_url('/admindashboard') ?>">Users</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="<?php echo base_url('/admin/products') ?>">Products</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="<?php echo base_url('/admin/userProducts') ?>">User Products</a>
+    </li>
+     <li class="nav-item">
+      <a class="nav-link" href="<?php echo base_url('/admin/reports') ?>">Reports</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="<?php echo base_url('auth/logout') ?>">Log Out</a>
@@ -49,9 +56,9 @@
                 <td><?php echo $user->email; ?></td>
                 <td>
                   <?php if($user->status == 0){?> <a href="javascript:void(0)" class="btn btn-danger btn-sm pt-2 btn-status" data-id="<?php echo $user->id; ?>">
-                  <span class="glyphicon glyphicon-log-out"></span> Deactive
-                </a> <?php } else { ?> <a href="<?php echo base_url('/'); ?>" class="btn btn-success btn-sm pt-2 btn-status" data-id="<?php echo $user->id; ?>">
-                  <span class="glyphicon glyphicon-log-out"></span> Active
+                  Deactive
+                </a> <?php } else { ?> <a href="javascript:void(0)" class="btn btn-success btn-sm pt-2 btn-status" data-id="<?php echo $user->id; ?>">
+                  Active
                 </a>  <?php  } ?>  
                 </td>
             </tr>
@@ -69,7 +76,7 @@
     $('body').on('click','.btn-status',function(){
       if(confirm("Are you sure you want to do this?")){
           $.ajax({
-            url: '<?php echo site_url('admin/updateStatus'); ?>',
+            url: '<?php echo base_url('admin/updateStatus'); ?>',
             type: 'POST',
             data: {
                 id: $(this).attr('data-id'),
@@ -85,9 +92,6 @@
       }
     });
 
-    $('body').on('click','#btnsubmit',function(){
-      
-    });
   });
 </script>
 

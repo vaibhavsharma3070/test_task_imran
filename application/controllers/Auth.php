@@ -92,7 +92,7 @@ class Auth extends CI_Controller {
 			$data = $this->db->get('users')->result();
 
 			if( $data[0]->role == 2 && $data[0]->status == 0 ){
-				$this->session->set_flashdata('error', 'User verification pending...');
+				$this->session->set_flashdata('error', 'Account In-Active...');
 				redirect('/');
 				exit;
 			}
@@ -123,9 +123,9 @@ class Auth extends CI_Controller {
 
 		// $this->session->sess_destroy();
 		
-	     $this->session->set_userdata(array('email' => null, 'id' => null, 'name' => null, 'is_logged_in' => 0, 'role' => null));
+	    $this->session->set_userdata(array('email' => null, 'id' => null, 'name' => null, 'is_logged_in' => 0, 'role' => null));
 
-	     $this->session->set_flashdata('success', 'You have successfully logged out.');
+	    $this->session->set_flashdata('success', 'You have successfully logged out.');
 
 		redirect('/');
 	}

@@ -15,6 +15,19 @@ class User_Product_model extends CI_Model {
 
     return $response;
   } 
+  function getAllUserProducts(){
+ 
+    $response = array();
+ 
+    // Select record
+    $this->db->select('*, products.status as pstatus');
+    $this->db->join('products','products.id = user_products.product_id');
+    $this->db->join('users','users.id = user_products.user_id');
+    $q = $this->db->get('user_products');
+    $response = $q->result_array();
+
+    return $response;
+  } 
 
   function verifyProducts($uid,$pid){
  
