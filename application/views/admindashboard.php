@@ -48,9 +48,9 @@
                 <td><?php echo $user->name; ?></td>
                 <td><?php echo $user->email; ?></td>
                 <td>
-                  <?php if($user->status == 0){?> <a href="javascript:void(0)" class="btn btn-danger btn-sm pt-2 btn-status" data-toggle="modal" data-target="#changestatus" data-id="<?php echo $user->id; ?>">
+                  <?php if($user->status == 0){?> <a href="javascript:void(0)" class="btn btn-danger btn-sm pt-2 btn-status" data-id="<?php echo $user->id; ?>">
                   <span class="glyphicon glyphicon-log-out"></span> Deactive
-                </a> <?php } else { ?> <a href="<?php echo base_url('/'); ?>" class="btn btn-success btn-sm pt-2 btn-status" data-toggle="modal" data-target="#changestatus" data-id="<?php echo $user->id; ?>">
+                </a> <?php } else { ?> <a href="<?php echo base_url('/'); ?>" class="btn btn-success btn-sm pt-2 btn-status" data-id="<?php echo $user->id; ?>">
                   <span class="glyphicon glyphicon-log-out"></span> Active
                 </a>  <?php  } ?>  
                 </td>
